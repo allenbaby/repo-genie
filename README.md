@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧞 Repo Genie
 
-## Getting Started
+**Repo Genie** is a web-based tool that allows users to generate a full-stack application structure, visualize the project files, preview source code, and directly upload the project to GitHub — all with a clean, modern interface.
 
-First, run the development server:
+## 🚀 Features
+
+- 🔑 GitHub Authentication (via NextAuth)
+- 📂 Visual file tree explorer
+- 🧠 AI-generated project structures
+- 📝 Monaco-based code preview
+- 🔄 GitHub repository upload (with auto folder and file creation)
+- 🧪 Clean architecture with modular components and service separation
+
+---
+
+## 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+├── @types                   # TypeScript type definitions
+│   └── next-auth.d.ts
+├── app                     # Next.js 13+ App Router
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── api
+│       ├── auth
+│       │   └── [...nextauth]/route.ts
+│       └── upload/route.ts
+├── components              # Reusable UI components
+│   ├── ApiKeyDialog.tsx
+│   ├── AppPreview.tsx
+│   ├── CodePreview.tsx
+│   ├── FileTreeViewer.tsx
+│   ├── GitHubAuthUpload.tsx
+│   └── PromptInput.tsx
+├── hooks                   # Custom hooks
+│   ├── use-mobile.tsx
+│   └── use-toast.ts
+├── lib                     # Utility functions
+│   └── utils.ts
+├── services                # Business logic & services
+│   └── projectGenerator.ts
+└── styles                  # CSS modules and global styles
+    └── Preview.css
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** TailwindCSS + MUI
+- **Authentication:** NextAuth.js (GitHub Provider)
+- **State Management:** React Hooks
+- **Editor:** Monaco Editor
+- **API:** REST API via Next.js Route Handlers
+- **Version Control:** GitHub REST API (via Octokit)
 
-## Learn More
+## ⚙️ Setup Instructions
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/repo-genie.git
+   cd repo-genie
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Create a `.env.local` file and add:
+   ```env
+   GITHUB_CLIENT_ID=your_id
+   GITHUB_CLIENT_SECRET=your_secret
+   NEXTAUTH_SECRET=some_random_string
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
-## Deploy on Vercel
+4. Run the development server:
+   ```bash
+   pnpm dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Visit `http://localhost:3000` in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📄 License
+
+MIT License © 2025

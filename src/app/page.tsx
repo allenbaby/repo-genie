@@ -28,9 +28,7 @@ const Page = () => {
     setSelectedFile(null);
 
     try {
-      console.log("Generating project structure with prompt:", prompt, tempApiKey);
       const structure = await generateProjectStructure(prompt, tempApiKey);
-      console.log("Generated project structure:", structure);
       setProjectStructure(structure);
 
       toast({

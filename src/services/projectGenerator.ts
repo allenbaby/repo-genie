@@ -69,7 +69,7 @@ Rules:
     if (!Array.isArray(structure)) {
       throw new Error('Invalid response format: expected array');
     }
-    console.log("Generated Project Structure:", structure);
+    // console.log("Generated Project Structure:", structure);
 
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -80,7 +80,7 @@ Rules:
 
     return structure;
   } catch (error) {
-    console.error('Error generating project structure:', error);
+    // console.error('Error generating project structure:', error);
 
     // Fallback to basic structure if API fails
     if (error instanceof Error && error.message.includes('API key required')) {
