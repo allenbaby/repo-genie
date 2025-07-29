@@ -19,7 +19,7 @@
 .
 ├── @types                   # TypeScript type definitions
 │   └── next-auth.d.ts
-├── app                     # Next.js 13+ App Router
+├── app                  
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
@@ -28,16 +28,14 @@
 │       ├── auth
 │       │   └── [...nextauth]/route.ts
 │       └── upload/route.ts
-├── components              # Reusable UI components
-│   ├── ApiKeyDialog.tsx
-│   ├── AppPreview.tsx
-│   ├── CodePreview.tsx
-│   ├── FileTreeViewer.tsx
-│   ├── GitHubAuthUpload.tsx
-│   └── PromptInput.tsx
-├── hooks                   # Custom hooks
-│   ├── use-mobile.tsx
-│   └── use-toast.ts
+├── components
+│       │   └── ui/sonner.ts             # Toast
+│       ├── ApiKeyDialog.tsx
+│       ├── AppPreview.tsx
+│       ├── CodePreview.tsx
+│       ├── FileTreeViewer.tsx
+│       ├── GitHubAuthUpload.tsx
+│       └── PromptInput.tsx
 ├── lib                     # Utility functions
 │   └── utils.ts
 ├── services                # Business logic & services
@@ -50,7 +48,7 @@
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js (App Router)
 - **Styling:** TailwindCSS + MUI
 - **Authentication:** NextAuth.js (GitHub Provider)
 - **State Management:** React Hooks

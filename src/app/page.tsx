@@ -10,7 +10,7 @@ import { generateProjectStructure } from "@/services/projectGenerator";
 import GitHubAuthUpload from "@/components/GitHubAuthUpload";
 import { SessionProvider } from "next-auth/react";
 import { toast } from "sonner";
-import { Folder, Eye, Code } from "lucide-react";
+import { Eye, Code } from "lucide-react";
 
 
 const Page = () => {
@@ -19,7 +19,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
   const [tempApiKey, setTempApiKey] = useState<string>("");
-  const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("preview");
+  const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("code");
 
   const handleGenerate = async (prompt: string) => {
     setIsLoading(true);

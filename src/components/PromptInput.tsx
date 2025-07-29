@@ -21,9 +21,9 @@ export const PromptInput = ({ onGenerate, isLoading }: PromptInputProps) => {
 
   const examplePrompts = [
     "Build a todo app with Reactjs with toast notification on creation/removal of todo",
-    "Create a user authentication system with JWT and password reset",
-    "Full-stack notes app with sharing features and real-time collaboration",
-    "E-commerce site with product catalog, cart, and payment integration"
+    "Create a Snake game using React which works with keyboard arrows",
+    "Build a chat app like iOS iMessage with blue bubbles using reactjs",
+    "Generate a React app that fetches weather data from OpenWeatherMap API and displays it with charts."
   ];
 
   return (
