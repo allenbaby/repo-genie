@@ -72,7 +72,7 @@ export const FileTreeViewer = ({
             "flex items-center gap-2 py-1 px-2 rounded cursor-pointer transition-colors",
             "hover:bg-zinc-800",
             isSelected && "bg-zinc-700 border-l-2 border-primary",
-            depth > 0 && "ml-4"
+            depth > 0 ? "ml-4" : ""
           )}
           onClick={() => {
             if (node.type === "folder") {

@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     const username = user.data.login;
 
     // STEP 2: Create new repo
-    const created = await octokit.rest.repos.createForAuthenticatedUser({
+    await octokit.rest.repos.createForAuthenticatedUser({
       name: repo,
       auto_init: false,
       private: false,
@@ -84,8 +84,12 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error) {
     console.error("GitHub Upload Error:", error);
-    return NextResponse.json({ error: error.message || "Upload failed" }, { status: 500 });
+    let errorMessage = "Upload failed";
+    if (error && typeof error === "object" && "message" in error) {
+      errorMessage = (error as { message?: string }).message || errorMessage;
+    }
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

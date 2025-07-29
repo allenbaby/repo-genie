@@ -7,10 +7,9 @@ import { CodePreview } from "@/components/CodePreview";
 import AppPreview from "@/components/AppPreview";
 import { ApiKeyDialog } from "@/components/ApiKeyDialog";
 import { generateProjectStructure } from "@/services/projectGenerator";
-import { useToast } from "@/hooks/use-toast";
 import GitHubAuthUpload from "@/components/GitHubAuthUpload";
 import { SessionProvider } from "next-auth/react";
-
+import { toast } from "sonner";
 import { Folder, Eye, Code } from "lucide-react";
 
 
@@ -21,7 +20,6 @@ const Page = () => {
   const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
   const [tempApiKey, setTempApiKey] = useState<string>("");
   const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("structure");
-  const { toast } = useToast();
 
   const handleGenerate = async (prompt: string) => {
     setIsLoading(true);
@@ -31,24 +29,17 @@ const Page = () => {
       const structure = await generateProjectStructure(prompt, tempApiKey);
       setProjectStructure(structure);
 
-      toast({
-        title: "Project structure generated!",
-        description: "Your project structure has been created successfully.",
-      });
+      toast.success("Your project structure has been created successfully.");
     } catch (error) {
       if (error instanceof Error && error.message.includes("API key required")) {
         setShowApiKeyDialog(true);
-        toast({
-          title: "API Key Required",
-          description: "Please provide your Groq API key to generate AI-powered structures.",
-          variant: "destructive",
+        toast.error("API Key Required", {
+          description: "Please provide your Groq API key to generate AI-powered structures."
         });
       } else {
-        toast({
-          title: "Generation failed",
+        toast.error("Generation failed", {
           description:
             error instanceof Error ? error.message : "There was an error generating your project structure.",
-          variant: "destructive",
         });
       }
     } finally {
@@ -61,8 +52,7 @@ const Page = () => {
     setShowApiKeyDialog(false);
     localStorage.setItem("groq_api_key", apiKey);
 
-    toast({
-      title: "API Key Set",
+    toast.success("API Key Set", {
       description: "You can now generate AI-powered project structures!",
     });
   };
@@ -96,11 +86,10 @@ const Page = () => {
             {/* Button Controls */}
             <div className="flex gap-4 justify-center mb-4">
               <button
-                className={`${baseBtnClass} ${
-                  activeView === "structure"
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                }`}
+                className={`${baseBtnClass} ${activeView === "structure"
+                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                  }`}
                 onClick={() => setActiveView("structure")}
                 aria-label="File Structure View"
               >
@@ -109,11 +98,10 @@ const Page = () => {
               </button>
 
               <button
-                className={`${baseBtnClass} ${
-                  activeView === "preview"
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                }`}
+                className={`${baseBtnClass} ${activeView === "preview"
+                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                  }`}
                 onClick={() => setActiveView("preview")}
                 aria-label="Live Preview View"
               >
@@ -122,11 +110,10 @@ const Page = () => {
               </button>
 
               <button
-                className={`${baseBtnClass} ${
-                  activeView === "code"
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                }`}
+                className={`${baseBtnClass} ${activeView === "code"
+                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                  }`}
                 onClick={() => setActiveView("code")}
                 aria-label="Code View"
               >

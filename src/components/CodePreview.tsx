@@ -1,16 +1,17 @@
 import { useRef } from "react";
-import Editor from "@monaco-editor/react";
+import Editor, { OnMount } from "@monaco-editor/react";
 import { Copy, FileText } from "lucide-react";
 import { FileNode } from "./FileTreeViewer";
+import * as monaco from "monaco-editor";
 
 interface CodePreviewProps {
   selectedFile: FileNode | null;
 }
 
 export const CodePreview = ({ selectedFile }: CodePreviewProps) => {
-  const editorRef = useRef(null);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
 
-  const getLanguageFromExtension = (filename: string) => {
+  const getLanguageFromExtension = (filename: string): string => {
     const ext = filename.split('.').pop()?.toLowerCase();
     switch (ext) {
       case 'js':
@@ -45,7 +46,7 @@ export const CodePreview = ({ selectedFile }: CodePreviewProps) => {
     }
   };
 
-  const handleEditorDidMount = (editor: any) => {
+  const handleEditorDidMount: OnMount = (editor) => {
     editorRef.current = editor;
   };
 

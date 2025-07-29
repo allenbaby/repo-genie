@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Wand2, Loader2 } from "lucide-react";
 
+
 interface PromptInputProps {
   onGenerate: (prompt: string) => void;
   isLoading: boolean;
@@ -19,7 +20,7 @@ export const PromptInput = ({ onGenerate, isLoading }: PromptInputProps) => {
   };
 
   const examplePrompts = [
-    "Build a todo app with Reactjs with ultra modern UI with colors",
+    "Build a todo app with Reactjs with toast notification on creation/removal of todo",
     "Create a user authentication system with JWT and password reset",
     "Full-stack notes app with sharing features and real-time collaboration",
     "E-commerce site with product catalog, cart, and payment integration"
@@ -33,7 +34,7 @@ export const PromptInput = ({ onGenerate, isLoading }: PromptInputProps) => {
             Repo Genie
           </h1>
           <p className="text-zinc-400">
-            Describe your project and get a complete structure with boilerplate code.
+            Describe your project and get a complete structure with live demo.
           </p>
         </div>
 
