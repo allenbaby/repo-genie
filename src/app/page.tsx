@@ -19,7 +19,7 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
   const [tempApiKey, setTempApiKey] = useState<string>("");
-  const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("structure");
+  const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("preview");
 
   const handleGenerate = async (prompt: string) => {
     setIsLoading(true);
@@ -85,7 +85,7 @@ const Page = () => {
           <div className="space-y-4">
             {/* Button Controls */}
             <div className="flex gap-4 justify-center mb-4">
-              <button
+              {/* <button
                 className={`${baseBtnClass} ${activeView === "structure"
                   ? "bg-blue-600 hover:bg-blue-700 text-white"
                   : "bg-gray-700 hover:bg-gray-600 text-gray-300"
@@ -95,7 +95,7 @@ const Page = () => {
               >
                 <Folder className="w-5 h-5" />
                 File Structure
-              </button>
+              </button> */}
 
               <button
                 className={`${baseBtnClass} ${activeView === "preview"
