@@ -1,0 +1,5 @@
+.sp-wrapper,
+.sp-layout,
+.sp-preview-container {
+  height: 100% !important;
+}
