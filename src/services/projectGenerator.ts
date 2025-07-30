@@ -13,9 +13,14 @@ export const generateProjectStructure = async (prompt: string, apiKey?: string):
       body: JSON.stringify({ prompt }),
     });
 
+    console.log("API Response line 16:", res);
+
     if (!res.ok) {
       if (res.status === 401) {
         throw new Error('API key required. Please set VITE_GROQ_API_KEY in your environment variables.');
+      }
+      if (res.status === 429) {
+        throw new Error('Rate limit exceeded. Please try again after some time.');
       }
       throw new Error(`API request failed: ${res.statusText}`);
     }
@@ -48,7 +53,7 @@ export const generateProjectStructure = async (prompt: string, apiKey?: string):
     // console.error('Error generating project structure:', error);
 
     // Fallback to basic structure if API fails
-    if (error instanceof Error && error.message.includes('API key required')) {
+    if (error instanceof Error) {
       throw error; // Re-throw API key errors
     }
 

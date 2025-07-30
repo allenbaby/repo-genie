@@ -28,6 +28,7 @@
 │       ├── auth
 │       │   └── [...nextauth]/route.ts
 │       └── upload/route.ts
+│       └── generate/route.ts
 ├── components
 │       │   └── ui/sonner.ts             # Toast
 │       ├── ApiKeyDialog.tsx
