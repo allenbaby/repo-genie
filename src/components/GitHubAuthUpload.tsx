@@ -67,13 +67,18 @@ const GitHubAuthUpload: React.FC<GitHubAuthUploadProps> = ({ projectStructure })
       {!session ? (
         <button
           onClick={() => signIn("github")}
-          className="absolute flex items-center gap-2 px-3 py-1.5 bg-purple-600 text-white text-sm rounded-md 
-          shadow-md hover:scale-[1.03] hover:shadow-lg transition-all duration-150 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="absolute flex items-center gap-2 
+                      px-2.5 py-1 text-xs
+                      sm:px-3 sm:py-1.5 sm:text-sm
+                      bg-purple-600 text-white rounded-md 
+                      shadow-md hover:scale-[1.03] hover:shadow-lg 
+                      transition-all duration-150 font-medium 
+                      focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          <LogIn className="w-5 h-5" />
-          <span>Sign in with GitHub</span>
+          <LogIn className="w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="sm:hidden">Sign in</span>
+          <span className="hidden sm:inline">Sign in with GitHub</span>
         </button>
-
       ) : (
         <>
           {/* User info top right */}
