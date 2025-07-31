@@ -91,7 +91,7 @@ const GitHubAuthUpload: React.FC<GitHubAuthUploadProps> = ({ projectStructure })
               height={32}
               className="w-8 h-8 rounded-full border-2 border-purple-500"
             />
-            <strong className="text-purple-400">{session.user?.name}</strong>
+            <strong className="text-purple-400 hidden sm:block">{session.user?.name}</strong>
             <button
 
               className="ml-2 text-zinc-400 hover:text-purple-400 hover:cursor-pointer transition"
