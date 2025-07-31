@@ -2,6 +2,8 @@
 
 **Repo Genie** is a web-based tool that allows users to generate a full-stack application structure, visualize the project files, preview source code, and directly upload the project to GitHub — all with a clean, modern interface.
 
+![Screenshot](./public/demo.gif)
+
 ## 🚀 Features
 
 - 🔑 GitHub Authentication (via NextAuth)
