@@ -1,9 +1,7 @@
-"use client";
-
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { toast } from "sonner";
-import { LogIn, LogOut, UploadCloud } from "lucide-react";
+import { LogIn, LogOut, UploadCloud, ChevronDown } from "lucide-react";
 import axios from "axios";
 import Image from "next/image";
 
@@ -20,6 +18,23 @@ interface GitHubAuthUploadProps {
 
 const GitHubAuthUpload: React.FC<GitHubAuthUploadProps> = ({ projectStructure }) => {
   const { data: session } = useSession();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Collapse dropdown when clicking outside
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownOpen]);
 
   const uploadToGitHub = async () => {
     if (!session?.accessToken) {
@@ -27,7 +42,7 @@ const GitHubAuthUpload: React.FC<GitHubAuthUploadProps> = ({ projectStructure })
       return;
     }
 
-    const repo = prompt("Enter repo name (e.g. username/repo-name):");
+    const repo = prompt("Enter repo name you want to create:");
     if (!repo) return;
 
     try {
@@ -48,45 +63,60 @@ const GitHubAuthUpload: React.FC<GitHubAuthUploadProps> = ({ projectStructure })
   };
 
   return (
-    <div className="flex flex-wrap justify-end gap-3 mb-4 items-center">
+    <div className="relative flex flex-col items-end">
       {!session ? (
         <button
           onClick={() => signIn("github")}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          className="absolute flex items-center gap-2 px-3 py-1.5 bg-purple-600 text-white text-sm rounded-md 
+          shadow-md hover:scale-[1.03] hover:shadow-lg transition-all duration-150 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <LogIn className="w-5 h-5" />
-          Sign in with GitHub
+          <span>Sign in with GitHub</span>
         </button>
+
       ) : (
         <>
-          <span className="flex items-center gap-2 text-white text-sm mr-4">
+          {/* User info top right */}
+          <div className="absolute top-0 right-0 flex items-center gap-2 hover:cursor-pointer bg-zinc-800 px-3 py-2 rounded-lg shadow"
+            ref={dropdownRef} onClick={() => setDropdownOpen((open) => !open)}>
             <Image
               src={session.user?.image || ""}
               alt="GitHub Avatar"
               width={32}
               height={32}
-              className="w-8 h-8 rounded-full border border-white"
+              className="w-8 h-8 rounded-full border-2 border-purple-500"
             />
-            Hello <strong>{session.user?.name}</strong>
-          </span>
-          <button
-            onClick={() => signOut()}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
-          >
-            <LogOut className="w-5 h-5" />
-            Sign out
-          </button>
-          <button
-            onClick={uploadToGitHub}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 hover:opacity-90 text-white rounded"
-          >
-            <UploadCloud className="w-5 h-5" />
-            Upload to GitHub
-          </button>
+            <strong className="text-purple-400">{session.user?.name}</strong>
+            <button
+
+              className="ml-2 text-zinc-400 hover:text-purple-400 hover:cursor-pointer transition"
+              aria-label="Open user menu"
+            >
+              <ChevronDown className="w-5 h-5" />
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-12 right-0 bg-zinc-900 border border-zinc-800 rounded-lg shadow-lg min-w-[180px] z-10">
+                <button
+                  onClick={uploadToGitHub}
+                  className="w-full flex items-center gap-2 px-4 py-3 text-left text-white hover:bg-zinc-800 hover:cursor-pointer rounded-t-lg transition"
+                >
+                  <UploadCloud className="w-5 h-5" />
+                  <span>Push to GitHub</span>
+                </button>
+                <button
+                  onClick={() => signOut()}
+                  className="w-full flex items-center gap-2 px-4 py-3 text-left text-white hover:bg-zinc-800 hover:cursor-pointer rounded-b-lg transition"
+                >
+                  <LogOut className="w-5 h-5" />
+                  <span>Sign out</span>
+                </button>
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
   );
-};
+}
 
 export default GitHubAuthUpload;

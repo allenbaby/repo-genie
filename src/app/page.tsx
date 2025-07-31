@@ -99,7 +99,7 @@ const Page = () => {
 
               <button
                 className={`${baseBtnClass} ${activeView === "preview"
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  ? "bg-purple-600 hover:bg-purple-700 text-white"
                   : "bg-gray-700 hover:bg-gray-600 text-gray-300"
                   }`}
                 onClick={() => setActiveView("preview")}
@@ -111,7 +111,7 @@ const Page = () => {
 
               <button
                 className={`${baseBtnClass} ${activeView === "code"
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
+                  ? "bg-purple-600 hover:bg-purple-700 text-white"
                   : "bg-gray-700 hover:bg-gray-600 text-gray-300"
                   }`}
                 onClick={() => setActiveView("code")}

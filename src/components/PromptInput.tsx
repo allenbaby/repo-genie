@@ -58,8 +58,8 @@ export const PromptInput = ({ onGenerate, isLoading }: PromptInputProps) => {
             className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-md font-semibold transition ${
               isLoading
                 ? "bg-zinc-700 text-zinc-400 cursor-not-allowed"
-                : "bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:opacity-90"
-            }`}
+                : "bg-gradient-to-r from-purple-600 to-pink-500 hover:scale-[1.01] text-white hover:opacity-90"
+              }`}
             disabled={!prompt.trim() || isLoading}
           >
             {isLoading ? (
