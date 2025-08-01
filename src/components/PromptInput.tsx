@@ -23,7 +23,7 @@ export const PromptInput = ({ onGenerate, isLoading }: PromptInputProps) => {
     "Build a todo app with Reactjs with toast notification on creation/removal of todo",
     "Create a Snake game using React which works with keyboard arrows",
     "Build a chat app like iOS iMessage with blue bubbles using reactjs",
-    "Generate a React app that fetches weather data from OpenWeatherMap API and displays it with charts."
+    "Generate a React app for playing XOX"
   ];
 
   return (
