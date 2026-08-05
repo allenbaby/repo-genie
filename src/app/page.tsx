@@ -21,7 +21,7 @@ const Page = () => {
   const [tempApiKey, setTempApiKey] = useState<string>("");
   const [activeView, setActiveView] = useState<
     "structure" | "preview" | "code"
-  >("code");
+  >("preview");
 
   const handleGenerate = async (prompt: string) => {
     setIsLoading(true);
