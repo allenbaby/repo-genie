@@ -12,14 +12,16 @@ import { SessionProvider } from "next-auth/react";
 import { toast } from "sonner";
 import { Eye, Code } from "lucide-react";
 
-
 const Page = () => {
   const [projectStructure, setProjectStructure] = useState<FileNode[]>([]);
   const [selectedFile, setSelectedFile] = useState<FileNode | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [previewKey, setPreviewKey] = useState(0);
   const [showApiKeyDialog, setShowApiKeyDialog] = useState(false);
   const [tempApiKey, setTempApiKey] = useState<string>("");
-  const [activeView, setActiveView] = useState<"structure" | "preview" | "code">("code");
+  const [activeView, setActiveView] = useState<
+    "structure" | "preview" | "code"
+  >("code");
 
   const handleGenerate = async (prompt: string) => {
     setIsLoading(true);
@@ -28,18 +30,24 @@ const Page = () => {
     try {
       const structure = await generateProjectStructure(prompt, tempApiKey);
       setProjectStructure(structure);
-
+      setPreviewKey((prev) => prev + 1); // force preview refresh
       toast.success("Your project structure has been created successfully.");
     } catch (error) {
-      if (error instanceof Error && error.message.includes("API key required")) {
+      if (
+        error instanceof Error &&
+        error.message.includes("API key required")
+      ) {
         setShowApiKeyDialog(true);
         toast.error("API Key Required", {
-          description: "Please provide your Groq API key to generate AI-powered structures."
+          description:
+            "Please provide your Groq API key to generate AI-powered structures.",
         });
       } else {
         toast.error("Generation failed", {
           description:
-            error instanceof Error ? error.message : "There was an error generating your project structure.",
+            error instanceof Error
+              ? error.message
+              : "There was an error generating your project structure.",
         });
       }
     } finally {
@@ -98,10 +106,11 @@ const Page = () => {
               </button> */}
 
               <button
-                className={`${baseBtnClass} ${activeView === "preview"
-                  ? "bg-purple-600 hover:bg-purple-700 text-white"
-                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                  }`}
+                className={`${baseBtnClass} ${
+                  activeView === "preview"
+                    ? "bg-purple-600 hover:bg-purple-700 text-white"
+                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                }`}
                 onClick={() => setActiveView("preview")}
                 aria-label="Live Preview View"
               >
@@ -110,10 +119,11 @@ const Page = () => {
               </button>
 
               <button
-                className={`${baseBtnClass} ${activeView === "code"
-                  ? "bg-purple-600 hover:bg-purple-700 text-white"
-                  : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-                  }`}
+                className={`${baseBtnClass} ${
+                  activeView === "code"
+                    ? "bg-purple-600 hover:bg-purple-700 text-white"
+                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                }`}
                 onClick={() => setActiveView("code")}
                 aria-label="Code View"
               >
@@ -130,7 +140,12 @@ const Page = () => {
                 selectedFile={selectedFile}
               />
             )}
-            {activeView === "preview" && <AppPreview projectStructure={projectStructure} />}
+            {activeView === "preview" && (
+              <AppPreview
+                projectStructure={projectStructure}
+                previewKey={previewKey}
+              />
+            )}
             {activeView === "code" && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <FileTreeViewer

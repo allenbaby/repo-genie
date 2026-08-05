@@ -8,9 +8,10 @@ import "@/styles/Preview.css";
 
 interface AppPreviewProps {
   projectStructure: FileNode[];
+  previewKey: number;
 }
 
-const AppPreview = ({ projectStructure }: AppPreviewProps) => {
+const AppPreview = ({ projectStructure, previewKey }: AppPreviewProps) => {
   if (!projectStructure.length) {
     return (
       <Card
@@ -174,6 +175,7 @@ const AppPreview = ({ projectStructure }: AppPreviewProps) => {
       <CardContent sx={{ flexGrow: 1, p: 0 }}>
         <div style={{ width: "100%", height: "100%", border: "2px solid #333" }}>
           <Sandpack
+            key = {previewKey}
             template="react"
             files={sandpackFiles}
             theme="dark"
